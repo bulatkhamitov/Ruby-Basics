@@ -15,6 +15,6 @@ class Station
   end
 
   def type_count(type)
-    @trains.count { |train| train.type == type}
+    @trains.count{ |train| train.type == type}
   end
 end
