@@ -1,6 +1,5 @@
 require_relative "modules/module_manufacturer.rb"
 require_relative "modules/module_instance_counter.rb"
-require_relative "modules/module_valid.rb"
 
 require_relative "station/station.rb"
 require_relative "route/route.rb"
@@ -15,7 +14,6 @@ require_relative "carriages/cargo_carriage.rb"
 
 require_relative "interface/interface.rb"
 require_relative "interface/menu.rb"
-require_relative "interface/railroad.rb"
 
 program = RailRoad.new
 program.start

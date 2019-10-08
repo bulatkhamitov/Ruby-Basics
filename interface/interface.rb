@@ -1,10 +1,96 @@
-class Interface
-    def init_message
+class Message
+  def start
+    program = Menu.new
+    loop do
+      init_message
+      choice = gets.to_i
+      case choice
+      when 0
+        break
+      when 1
+        create_message
+        choice = gets.to_i
+        case choice
+        when 0
+          break
+        when 1
+          program.create_station
+        when 2
+          program.create_route
+        when 3
+          program.create_train
+        when 4
+          program.create_carriage
+        end
+      when 2
+        change_message
+        choice = gets.to_i
+        case choice
+        when 0
+          break
+        when 1
+          program.put_station
+        when 2
+          program.delete_station
+        when 3
+          program.put_route
+        when 4
+          program.put_carriage
+        when 5
+          program.delete_carriage
+        when 6
+          program.accelerate
+        when 7
+          program.slow
+        when 8
+          program.forward
+        when 9
+          program.back
+        end
+      when 3
+        info_message
+        choice = gets.to_i
+        case choice
+        when 0
+          break
+        when 1
+          train_info
+          choice = gets.to_i
+          case choice
+          when 0
+            break
+          when 1
+            program.instant_speed
+          when 2
+            program.previous_st
+          when 3
+            program.current_st
+          when 4
+            program.next_st
+          when 5
+            program.type
+          when 6
+            program.train_number
+          when 7
+            program.carriage_list
+          end
+        when 2
+          program.train_list
+        when 3
+          program.station_list
+        end
+      end
+    end
+  end
+
+  private
+
+  def init_message
     puts "------------------------"
-    puts "0 - QUIT"
-    puts "1 - create objects"
-    puts "2 - change objects"
-    puts "3 - see info about objects"
+    puts "0 - QUIT"                   # -> break
+    puts "1 - create objects"         # -> create_message
+    puts "2 - change objects"         # -> change_message
+    puts "3 - see info about objects" # -> info_message
     puts "------------------------"
   end
 
