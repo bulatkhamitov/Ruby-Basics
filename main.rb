@@ -1,13 +1,19 @@
-require_relative "station.rb"
-require_relative "route.rb"
-require_relative "train.rb"
-require_relative "cargo_train.rb"
-require_relative "passenger_train.rb"
-require_relative "carriage.rb"
-require_relative "passenger_carriage.rb"
-require_relative "cargo_carriage.rb"
-require_relative "messages.rb"
-require_relative "menu.rb"
+require_relative "modules/module_manufacturer.rb"
+require_relative "modules/module_instance_counter.rb"
 
-program = Message.new
+require_relative "station/station.rb"
+require_relative "route/route.rb"
+
+require_relative "trains/train.rb"
+require_relative "trains/cargo_train.rb"
+require_relative "trains/passenger_train.rb"
+
+require_relative "carriages/carriage.rb"
+require_relative "carriages/passenger_carriage.rb"
+require_relative "carriages/cargo_carriage.rb"
+
+require_relative "interface/interface.rb"
+require_relative "interface/menu.rb"
+
+program = RailRoad.new
 program.start
