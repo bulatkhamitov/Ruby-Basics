@@ -1,17 +1,24 @@
 class Train
-  attr_reader :number, :speed, :route, :station_index, :carriages, :type
+  attr_reader :speed, :route, :station_index, :carriages, :type
+  attr_accessor :number
+
   include InstanceCounter
   include Manufacturer
+  include Valid
+
   @@all_trains = {}
+
+  NUMBER_FORMAT = /^(\d|[a-z]){3}(-(\d|[a-z]){2})*$/i
 
   def initialize(number, type)
     @number = number
     @type = type
+    validate!
     @speed = 0
     @route = nil
     @station_index = nil
     @carriages = []
-    @@all_trains[number] = self
+    @@all_trains[@number] = self
     register_instance
   end
 
@@ -77,5 +84,11 @@ class Train
       @station_index += 1
       current_station.add_train(self)
     end
+  end
+
+  protected
+
+  def validate!
+    raise "Number has invalid format!" if number !~ NUMBER_FORMAT
   end
 end

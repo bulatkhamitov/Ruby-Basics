@@ -8,12 +8,18 @@ class Menu
     @wagons  = [] # carriages
   end
 
-  def create_station
-    puts "------------------------"
-    print "Enter the name of the station (i.e. Maryino): "
-    station = gets.chomp!
-    @depots << Station.new(station)
-    puts "Station created successfully."
+  def create_station    
+    begin
+      puts "------------------------"
+      print "Enter the name of the station (i.e. Maryino): "
+      station = gets.chomp!
+      @depots << Station.new(station)   
+      puts "Station created successfully."
+    rescue
+      NameError
+      puts "Try again"
+      retry
+    end
   end
 
   def create_route
@@ -35,19 +41,21 @@ class Menu
     choice = gets.to_i
     case choice
     when 1
-      puts "------------------------"
-      print "Enter the train's number (i.e. 123, ABC, ...): "
-      number = gets.chomp!
-      puts "------------------------"
-      @engines << PassengerTrain.new(number)
-      puts "Passenger train created successfully."
+      begin
+        create_pass_train
+      rescue
+        NameError
+        puts "Try again"
+        retry
+      end
     when 2
-      puts "------------------------"
-      print "Enter the train's number (i.e. 123, ABC, ...): "
-      number = gets.chomp!
-      puts "------------------------"
-      @engines << CargoTrain.new(number)
-      puts "Cargo train created successfully."
+      begin
+        create_cargo_train
+      rescue
+        NameError
+        puts "Try again"
+        retry
+      end
     end
   end
 
@@ -59,13 +67,9 @@ class Menu
     choice = gets.to_i
     case choice
     when 1
-      puts "------------------------"
-      @wagons << PassengerCarriage.new
-      puts "Passenger carriage created successfully."
+      create_pass_carriage
     when 2
-      puts "------------------------"
-      @wagons << CargoCarriage.new
-      puts "Cargo carriage created successfully."
+      create_cargo_carriage
     end
   end
 
@@ -93,7 +97,7 @@ class Menu
     st = gets.to_i
     puts "------------------------"
     if !@routes.nil? && !depots_diff[st].nil?
-      @routes[rt].add_station(depots_diff[st])
+      @routes[rt].add_station(depots_diff[st])      
       puts "Station has been successfully added."
     end
   end
@@ -120,8 +124,6 @@ class Menu
     if @engines[tr].carriages.include?(@wagons[cr])
       puts "Carriage added successfully."
       @wagons.delete(@wagons[cr])
-    else
-      puts "ERROR"
     end
   end
 
@@ -138,8 +140,6 @@ class Menu
     puts "------------------------"
     if !@engines[tr].carriages.include?(@wagons[cr])
       puts "Carriage removed successfully."
-    else
-      puts "ERROR"
     end
   end
 
@@ -171,13 +171,13 @@ class Menu
   def forward
     train_choice
     tr = gets.to_i
-    @engines[tr].move_forward
+    @engines[tr].move_forward    
   end
 
   def back
     train_choice
     tr = gets.to_i
-    @engines[tr].move_back
+    @engines[tr].move_back      
   end
 
   def previous_st
@@ -245,6 +245,36 @@ class Menu
   end
 
   private
+
+  def create_pass_train
+    puts "------------------------"
+    print "Enter the train's number (i.e. 123, ABC, ...): "
+    number = gets.chomp!
+    puts "------------------------"
+    @engines << PassengerTrain.new(number)
+    puts "Passenger train created successfully."
+  end
+
+  def create_cargo_train
+    puts "------------------------"
+    print "Enter the train's number (i.e. 123, ABC, ...): "
+    number = gets.chomp!
+    puts "------------------------"
+    @engines << CargoTrain.new(number)
+    puts "Cargo train created successfully."
+  end
+
+  def create_pass_carriage
+    puts "------------------------"
+    @wagons << PassengerCarriage.new
+    puts "Passenger carriage created successfully."
+  end
+
+  def create_cargo_carriage
+    puts "------------------------"
+    @wagons << CargoCarriage.new
+    puts "Cargo carriage created successfully."
+  end
 
   def train_choice
     puts "------------------------"

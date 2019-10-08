@@ -1,5 +1,5 @@
 class PassengerTrain < Train
-  def initialize(umber)
+  def initialize(number)
     super(number, "Passenger")
   end
 end

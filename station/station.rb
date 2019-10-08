@@ -1,10 +1,16 @@
 class Station
   attr_reader :name, :trains
+
   include InstanceCounter
+  include Valid
+
   @@all_stations = []
+
+  NAME_FORMAT = /^[A-Z]+[a-z]{2,20}$/
 
   def initialize(name)
     @name = name
+    validate!
     @trains = []
     @@all_stations.push(self)
     register_instance
@@ -24,5 +30,11 @@ class Station
 
   def type_count(type)
     @trains.count{ |train| train.type == type}
+  end
+
+  protected
+
+  def validate!
+    raise "Name has invalid format!" if name !~ NAME_FORMAT
   end
 end
