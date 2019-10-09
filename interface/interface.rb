@@ -20,16 +20,17 @@ class Interface
 
   def change_message
     puts "------------------------"
-    puts "0 - QUIT"
-    puts "1 - Add the station to the route"
-    puts "2 - Remove the station from the route"
-    puts "3 - Put route to the train"
-    puts "4 - Add the carriage to the train"
-    puts "5 - Remove the carriage from the train"
-    puts "6 - Speed up train"
-    puts "7 - Slow down train"
-    puts "8 - Move forward train"
-    puts "9 - Move back train"
+    puts "0  - QUIT"
+    puts "1  - Add the station to the route"
+    puts "2  - Remove the station from the route"
+    puts "3  - Put route to the train"
+    puts "4  - Add the carriage to the train"
+    puts "5  - Remove the carriage from the train"
+    puts "6  - Speed up train"
+    puts "7  - Slow down train"
+    puts "8  - Move forward train"
+    puts "9  - Move back train"
+    puts "10 - Reserve seat/volume in carriage"
     puts "------------------------"
   end
 

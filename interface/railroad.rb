@@ -47,6 +47,8 @@ class RailRoad
           program.forward
         when 9
           program.back
+        when 10
+          program.reserve_space
         end
       when 3
         interface.info_message

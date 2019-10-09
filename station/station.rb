@@ -32,6 +32,10 @@ class Station
     @trains.count{ |train| train.type == type}
   end
 
+  def layout
+    @trains.each { |train| yield(train) if block_given?}
+  end
+
   protected
 
   def validate!

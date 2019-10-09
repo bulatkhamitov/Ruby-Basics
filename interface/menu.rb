@@ -8,12 +8,12 @@ class Menu
     @wagons  = [] # carriages
   end
 
-  def create_station    
+  def create_station
     begin
       puts "------------------------"
       print "Enter the name of the station (i.e. Maryino): "
       station = gets.chomp!
-      @depots << Station.new(station)   
+      @depots << Station.new(station)
       puts "Station created successfully."
     rescue
       NameError
@@ -97,7 +97,7 @@ class Menu
     st = gets.to_i
     puts "------------------------"
     if !@routes.nil? && !depots_diff[st].nil?
-      @routes[rt].add_station(depots_diff[st])      
+      @routes[rt].add_station(depots_diff[st])
       puts "Station has been successfully added."
     end
   end
@@ -171,13 +171,13 @@ class Menu
   def forward
     train_choice
     tr = gets.to_i
-    @engines[tr].move_forward    
+    @engines[tr].move_forward
   end
 
   def back
     train_choice
     tr = gets.to_i
-    @engines[tr].move_back      
+    @engines[tr].move_back
   end
 
   def previous_st
@@ -218,7 +218,7 @@ class Menu
     station_choice
     st = gets.to_i
     puts "------------------------"
-    @depots[st].trains.each { |train| puts train.number}
+    @depots[st].layout {|train| puts "Number: #{train.number}, Type: #{train.type}, Number of carriages: #{train.carriage_counter}"}
   end
 
   def station_list
@@ -232,8 +232,10 @@ class Menu
     train_choice
     tr = gets.to_i
     puts "------------------------"
-    if @engines[tr].carriages.any?
-      puts @engines[tr].carriages
+    if @engines[tr].instance_of?(PassengerTrain)
+      @engines[tr].layout { |carriage| puts "Type: #{carriage.type}, Number: #{carriage.number}, Free seats: #{carriage.free_seats}, Occupied seats: #{carriage.occupied_seats}" }
+    elsif @engines[tr].instance_of?(CarriageTrain)
+      @engines[tr].layout { |carriage| puts "Type: #{carriage.type}, Number: #{carriage.number}, Free volume: #{carriage.free_volume}, Occupied volume: #{carriage.occupied_volume}" }
     end
   end
 
@@ -244,11 +246,30 @@ class Menu
     puts @engines[tr].type
   end
 
+  def reserve_space
+    train_choice
+    tr = gets.to_i
+    puts "------------------------"
+    puts "Choose the carriage's number (by index, i.e. 0, 1, ...):"
+    puts "------------------------"
+    @engines[tr].carriages.each_with_index { |carriage, index| puts "#{carriage} - Carriage [#{index}]"}
+    puts "------------------------"
+    cr = gets.to_i
+    carriage = @engines[tr].carriages[cr]
+    if carriage.instance_of?(PassengerCarriage)
+      carriage.take_seat
+      puts "Seat taken."
+    elsif @engines[tr].carriages[cr].instance_of?(CargoCarriage)
+      carriage.load_freight
+      puts "Cargo loaded."
+    end
+  end
+
   private
 
   def create_pass_train
     puts "------------------------"
-    print "Enter the train's number (i.e. 123, ABC, ...): "
+    print "Enter the train's number (i.e. AAA-11): "
     number = gets.chomp!
     puts "------------------------"
     @engines << PassengerTrain.new(number)
@@ -257,7 +278,7 @@ class Menu
 
   def create_cargo_train
     puts "------------------------"
-    print "Enter the train's number (i.e. 123, ABC, ...): "
+    print "Enter the train's number (i.e. BBB-22): "
     number = gets.chomp!
     puts "------------------------"
     @engines << CargoTrain.new(number)
@@ -266,13 +287,19 @@ class Menu
 
   def create_pass_carriage
     puts "------------------------"
-    @wagons << PassengerCarriage.new
+    print "Enter the total seating capacity: "
+    capacity = gets.to_i
+    puts "------------------------"
+    @wagons << PassengerCarriage.new(capacity)
     puts "Passenger carriage created successfully."
   end
 
   def create_cargo_carriage
     puts "------------------------"
-    @wagons << CargoCarriage.new
+    print "Enter the total freight volume: "
+    freight = gets.to_i
+    puts "------------------------"
+    @wagons << CargoCarriage.new(freight)
     puts "Cargo carriage created successfully."
   end
 

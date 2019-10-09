@@ -1,5 +1,5 @@
 class Train
-  attr_reader :speed, :route, :station_index, :carriages, :type
+  attr_reader :speed, :route, :station_index, :carriages, :type, :carriage_counter
   attr_accessor :number
 
   include InstanceCounter
@@ -15,9 +15,8 @@ class Train
     @type = type
     validate!
     @speed = 0
-    @route = nil
-    @station_index = nil
     @carriages = []
+    @carriage_counter = 0
     @@all_trains[@number] = self
     register_instance
   end
@@ -39,12 +38,14 @@ class Train
   def add_carriage(carriage)
     if @speed == 0 && self.type == carriage.type
       @carriages.push(carriage)
+      @carriage_counter += 1
     end
   end
 
   def remove_carriage(carriage)
     if speed == 0
       @carriages.delete(carriage)
+      @carriage_counter -= 1
     end
   end
 
@@ -84,6 +85,10 @@ class Train
       @station_index += 1
       current_station.add_train(self)
     end
+  end
+
+  def layout
+    @carriages.each { |carriage| yield(carriage) if block_given?}
   end
 
   protected
