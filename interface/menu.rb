@@ -257,6 +257,7 @@ class Menu
     cr = gets.to_i
     carriage = @engines[tr].carriages[cr]
     carriage.take_space
+    puts "------------------------"
     if carriage.instance_of?(PassengerCarriage)
       puts "Seat taken."
     elsif carriage.instance_of?(CargoCarriage)

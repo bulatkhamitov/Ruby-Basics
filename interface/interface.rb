@@ -30,7 +30,7 @@ class Interface
     puts "7  - Slow down train"
     puts "8  - Move forward train"
     puts "9  - Move back train"
-    puts "10 - Reserve seat/volume in carriage"
+    puts "10 - Reserve space in carriage"
     puts "------------------------"
   end
 

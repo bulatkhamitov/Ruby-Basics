@@ -34,6 +34,6 @@ class Route
 
   def validate!
     raise "Route has to constist of at least 2 different stations" if start_station == end_station
-    raise "Objects are not instances of Station class" if !start_station.instance_of?(Station) || !end_station.instance_of?(Station)
+    raise "Objects are not instances of the class Station" if !start_station.instance_of?(Station) || !end_station.instance_of?(Station)
   end
 end

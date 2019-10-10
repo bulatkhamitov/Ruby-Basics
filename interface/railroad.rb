@@ -1,6 +1,6 @@
 class RailRoad
   def start
-    program = Menu.new
+    programme = Menu.new
     interface = Interface.new
     loop do
       interface.init_message
@@ -15,13 +15,13 @@ class RailRoad
         when 0
           break
         when 1
-          program.create_station
+          programme.create_station
         when 2
-          program.create_route
+          programme.create_route
         when 3
-          program.create_train
+          programme.create_train
         when 4
-          program.create_carriage
+          programme.create_carriage
         end
       when 2
         interface.change_message
@@ -30,25 +30,25 @@ class RailRoad
         when 0
           break
         when 1
-          program.put_station
+          programme.put_station
         when 2
-          program.delete_station
+          programme.delete_station
         when 3
-          program.put_route
+          programme.put_route
         when 4
-          program.put_carriage
+          programme.put_carriage
         when 5
-          program.delete_carriage
+          programme.delete_carriage
         when 6
-          program.accelerate
+          programme.accelerate
         when 7
-          program.slow
+          programme.slow
         when 8
-          program.forward
+          programme.forward
         when 9
-          program.back
+          programme.back
         when 10
-          program.reserve_space
+          programme.reserve_space
         end
       when 3
         interface.info_message
@@ -63,24 +63,24 @@ class RailRoad
           when 0
             break
           when 1
-            program.instant_speed
+            programme.instant_speed
           when 2
-            program.previous_st
+            programme.previous_st
           when 3
-            program.current_st
+            programme.current_st
           when 4
-            program.next_st
+            programme.next_st
           when 5
-            program.type
+            programme.type
           when 6
-            program.train_number
+            programme.train_number
           when 7
-            program.carriage_list
+            programme.carriage_list
           end
         when 2
-          program.train_list
+          programme.train_list
         when 3
-          program.station_list
+          programme.station_list
         end
       end
     end
