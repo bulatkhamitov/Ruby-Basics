@@ -1,5 +1,5 @@
 class CargoCarriage < Carriage
-  def initialize
-    super("Cargo")
+  def initialize(freight_volume)
+    super("Cargo", freight_volume)
   end
 end
