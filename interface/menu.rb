@@ -233,9 +233,9 @@ class Menu
     tr = gets.to_i
     puts "------------------------"
     if @engines[tr].instance_of?(PassengerTrain)
-      @engines[tr].layout { |carriage| puts "Type: #{carriage.type}, Number: #{carriage.number}, Free seats: #{carriage.free_space}, Occupied seats: #{carriage.occupied_space}" }
+      @engines[tr].layout { |carriage| puts "Type: #{carriage.type}, Number: #{carriage.number}, Free seats: #{carriage.free_seats}, Occupied seats: #{carriage.occupied_seats}" }
     elsif @engines[tr].instance_of?(CarriageTrain)
-      @engines[tr].layout { |carriage| puts "Type: #{carriage.type}, Number: #{carriage.number}, Free volume: #{carriage.free_space}, Occupied volume: #{carriage.occupied_space}" }
+      @engines[tr].layout { |carriage| puts "Type: #{carriage.type}, Number: #{carriage.number}, Free volume: #{carriage.free_volume}, Occupied volume: #{carriage.occupied_volume}" }
     end
   end
 
@@ -256,10 +256,11 @@ class Menu
     puts "------------------------"
     cr = gets.to_i
     carriage = @engines[tr].carriages[cr]
-    carriage.take_space
     if carriage.instance_of?(PassengerCarriage)
+      carriage.take_seat
       puts "Seat taken."
-    elsif carriage.instance_of?(CargoCarriage)
+    elsif @engines[tr].carriages[cr].instance_of?(CargoCarriage)
+      carriage.load_freight
       puts "Cargo loaded."
     end
   end
