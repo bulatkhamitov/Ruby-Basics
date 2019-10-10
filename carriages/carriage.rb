@@ -14,7 +14,7 @@ class Carriage
   end
 
   def take_space(space)
-    @free_space -= space unless space > @free_space
+    @free_space -= space unless @free_space < space
   end
 
   def occupied_space
