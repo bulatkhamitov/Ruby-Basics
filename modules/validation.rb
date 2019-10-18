@@ -38,7 +38,7 @@ module Validation
     end
 
     def type(var_name, val_type)
-      raise "#{var_name} must have a type of #{val_type}"  if !var_name.is_a? val_type
+      raise "#{var_name} must have a type of #{val_type}" unless var_name.is_a? val_type
     end
   end
 end

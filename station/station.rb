@@ -1,8 +1,10 @@
 class Station
-  attr_reader :name, :trains
-
   include InstanceCounter
   include Validation
+  extend Accessor
+
+  attr_reader :trains
+  attr_accessor_with_history :name
 
   @@all_stations = []
 
