@@ -1,12 +1,14 @@
 class Station
-  attr_reader :name, :trains
-
   include InstanceCounter
-  include Valid
+  include Validation
+
+  attr_reader :name, :trains
 
   @@all_stations = []
 
   NAME_FORMAT = /^[A-Z]+[a-z]{2,20}$/
+
+  validate :name, :format, NAME_FORMAT
 
   def initialize(name)
     @name = name
@@ -34,11 +36,5 @@ class Station
 
   def layout
     @trains.each { |train| yield(train) if block_given?}
-  end
-
-  protected
-
-  def validate!
-    raise "Station name has invalid format!" if name !~ NAME_FORMAT
   end
 end

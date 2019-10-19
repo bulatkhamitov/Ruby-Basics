@@ -7,7 +7,7 @@ class RailRoad
       choice = gets.to_i
       case choice
       when 0
-        break
+        break        
       when 1
         interface.create_message
         choice = gets.to_i

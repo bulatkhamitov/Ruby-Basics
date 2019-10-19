@@ -4,11 +4,13 @@ class Train
 
   include InstanceCounter
   include Manufacturer
-  include Valid
+  include Validation
 
   @@all_trains = {}
 
   NUMBER_FORMAT = /^(\d|[a-z]){3}(-(\d|[a-z]){2})*$/i
+
+  validate :number, :format, NUMBER_FORMAT
 
   def initialize(number, type)
     @number = number
@@ -89,11 +91,5 @@ class Train
 
   def layout
     @carriages.each { |carriage| yield(carriage) if block_given?}
-  end
-
-  protected
-
-  def validate!
-    raise "Number has invalid format!" if number !~ NUMBER_FORMAT
   end
 end
