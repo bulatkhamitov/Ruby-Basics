@@ -35,11 +35,13 @@ class Test
   attr_accessor_with_history :a, :b
   strong_attr_accessor :s, String
 
-  validate :a, :presence
-  validate :a, :format, /[0-9]{3}/
-  validate :a, :type, String
+  validate :check_1, :presence
+  validate :check_2, :format, /[a-z]{3}/
+  validate :check_3, :type, String
 
-  def initialize(inpt)
-    @a = inpt
+  def initialize(check_2, check_3)
+    @check_2 = check_2
+    @check_3 = check_3
+    validate!
   end
 end

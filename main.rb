@@ -18,5 +18,5 @@ require_relative "interface/interface.rb"
 require_relative "interface/menu.rb"
 require_relative "interface/railroad.rb"
 
-programme = RailRoad.new
-programme.start
+program = RailRoad.new
+program.start

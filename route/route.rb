@@ -4,8 +4,8 @@ class Route
   include InstanceCounter
   include Validation
 
-  #validate :start_station, :type, Station
-  #validate :end_station, :type, Station
+  #validate :start_station, :class, Station
+  #validate :end_station, :class, Station
 
   def initialize(start_station, end_station)
     @stations = [start_station, end_station]
